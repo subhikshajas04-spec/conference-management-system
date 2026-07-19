@@ -1,38 +1,62 @@
 # ConfHub - Conference Management System
 
-**A Modern Role-Based Conference Management Platform**  
-** Mini Project** | Python + Flask + SQLite
-
----
+A web-based, role-based Conference Management System developed as a mini project using Python and Flask. The system provides a centralized platform for managing conferences, paper submissions, reviews, presentations, and attendees.
 
 ## ✨ Key Features
 
-- Multi-role authentication (Admin, Organizer, Author, Reviewer, Attendee)
+- Multi-role authentication for:
+  - Admin
+  - Organizer
+  - Author
+  - Reviewer
+  - Attendee
 - Conference creation and management
-- Paper submission with file upload
+- Research paper submission with file upload
 - Plagiarism simulation check
-- Reviewer assignment and review system
-- Paper status workflow (Submitted → Accepted/Rejected/Revised)
+- Reviewer assignment and review management
+- Paper status workflow:
+  - Submitted
+  - Accepted
+  - Rejected
+  - Revised
 - Presentation scheduling
-- Certificate generation (PDF)
-- Attendee registration and browsing
-- Modern responsive UI with role-based cards
-- Real-time analytics on Organizer dashboard
+- PDF certificate generation
+- Attendee registration and conference browsing
+- Role-based dashboards and user interfaces
+- Organizer dashboard with analytics
 
----
+## 🛠️ Tech Stack
 
-## 🛠 Tech Stack
+### Backend
+- Python
+- Flask
+- Flask-SQLAlchemy
+- SQLAlchemy
 
-- **Backend**: Flask (Python)
-- **Database**: SQLite with SQLAlchemy
-- **Frontend**: Bootstrap 5 + Font Awesome
-- **PDF Generation**: ReportLab
-- **Security**: Werkzeug password hashing + Flask sessions
+### Frontend
+- HTML
+- CSS
+- Bootstrap 5
+- Font Awesome
 
----
+### Database
+- SQLite
 
-## 🚀 How to Run
+### Other Technologies
+- ReportLab for PDF generation
+- Werkzeug for password hashing and session security
 
-1. Activate virtual environment:
-   ```bash
-   venv\Scripts\activate
+## 📁 Project Structure
+
+```text
+conference-management-system/
+│
+├── routes/              # Application routes and role-based modules
+├── templates/           # HTML templates and role-specific pages
+├── uploads/             # Uploaded files
+├── app.py               # Main Flask application
+├── config.py            # Application configuration
+├── models.py            # Database models
+├── requirements.txt     # Python dependencies
+├── README.md            # Project documentation
+└── .gitignore           # Git ignored files
