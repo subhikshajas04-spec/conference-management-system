@@ -105,7 +105,4 @@ Mini Project
 Developed using: Python, Flask, SQLite, HTML, CSS, Bootstrap, and JavaScript
 
 
-After you paste it into `README.md`, click **Commit changes** with this message:
 
-```text
-Improve project README documentation
