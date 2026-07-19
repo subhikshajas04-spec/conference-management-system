@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>My Conferences</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Dates</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for conf in conferences %}
+        <tr>
+            <td>{{ conf.title }}</td>
+            <td>{{ conf.start_date }} to {{ conf.end_date }}</td>
+            <td>{{ conf.location }}</td>
+            <td>
+                <a href="{{ url_for('organizer.manage_papers', conf_id=conf.id) }}"
+                    class="btn btn-sm btn-primary">Manage Papers</a>
+                <a href="{{ url_for('organizer.view_attendees', conf_id=conf.id) }}"
+                    class="btn btn-sm btn-info ms-2">View Attendees</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('organizer.create_conference') }}" class="btn btn-primary">Create New Conference</a>
+
+{% endblock %}

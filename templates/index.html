@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+
+            <h1 class="display-4 fw-bold text-primary mb-3">ConfHub</h1>
+            <p class="lead text-muted mb-4">The Complete Conference Management System</p>
+            <p class="fs-5 text-muted mb-5">
+                Streamline paper submissions, reviews, scheduling, and attendee management — all in one place.
+            </p>
+
+            <!-- Get Started Button - points to login -->
+            <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow mb-5">
+                🚀 Get Started
+            </a>
+
+            <div class="row g-5 justify-content-center">
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-file-alt fa-3x text-primary mb-3"></i>
+                    <h5>Paper Submission</h5>
+                    <p class="text-muted small">Easy upload & tracking</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-users fa-3x text-success mb-3"></i>
+                    <h5>Reviewer Assignment</h5>
+                    <p class="text-muted small">Smart review process</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-calendar-alt fa-3x text-warning mb-3"></i>
+                    <h5>Session Scheduling</h5>
+                    <p class="text-muted small">Organize presentations</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

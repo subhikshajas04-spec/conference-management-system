@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h2>Assign Reviewer</h2>
+    <h5 class="mb-4">Paper: {{ paper.title }}</h5>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Select Reviewer</label>
+                    <select name="reviewer_id" class="form-select" required>
+                        <option value="">-- Choose a Reviewer --</option>
+                        {% for reviewer in reviewers %}
+                        <option value="{{ reviewer.id }}">{{ reviewer.name }} ({{ reviewer.email }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Assign Reviewer</button>
+                <a href="{{ url_for('organizer.manage_papers', conf_id=paper.conference_id) }}"
+                    class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

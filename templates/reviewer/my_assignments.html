@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Assigned Papers</h2>
+
+{% if papers %}
+<table class="table">
+    <tr>
+        <th>Paper Title</th>
+        <th>Action</th>
+    </tr>
+    {% for paper in papers %}
+    <tr>
+        <td>{{ paper.title }}</td>
+        <td>
+            <a href="{{ url_for('reviewer.review_paper', paper_id=paper.id) }}" class="btn btn-primary btn-sm">
+                Review Paper
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<div class="alert alert-info">No papers assigned yet.</div>
+{% endif %}
+{% endblock %}

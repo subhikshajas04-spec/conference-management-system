@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Upload Revised Version</h2>
+<h5>Paper: {{ paper.title }}</h5>
+<p class="text-warning">Status: Revised Requested</p>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Upload Revised Paper (PDF)</label>
+        <input type="file" name="revision_file" class="form-control" accept=".pdf" required>
+    </div>
+    <button type="submit" class="btn btn-success">Upload Revised Paper</button>
+    <a href="{{ url_for('author.my_papers') }}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}

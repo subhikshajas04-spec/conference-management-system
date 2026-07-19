@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Schedule Presentation</h2>
+<h5>Paper: {{ paper.title }}</h5>
+<p class="text-muted">Conference Dates: {{ conference.start_date }} to {{ conference.end_date }}</p>
+
+<form method="POST">
+    <div class="mb-3">
+        <label>Session Title</label>
+        <input type="text" name="session_title" class="form-control" placeholder="e.g., Technical Session 1" required>
+    </div>
+    <div class="mb-3">
+        <label>Select Date (within conference period)</label>
+        <select name="session_date" class="form-select" required>
+            <option value="">-- Choose Date --</option>
+            {% for date in dates %}
+            <option value="{{ date }}">{{ date.strftime('%d %B %Y (%A)') }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Select Time</label>
+        <input type="time" name="session_time" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Schedule Presentation</button>
+    <a href="{{ url_for('organizer.manage_papers', conf_id=paper.conference_id) }}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}

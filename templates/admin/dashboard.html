@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Admin Dashboard - System Management</h2>
+
+<h4>Total Users: {{ users|length }}</h4>
+<h4>Total Conferences: {{ conferences|length }}</h4>
+<h4>Total Papers: {{ papers|length }}</h4>
+
+<table class="table table-bordered mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role|upper }}</td>
+            <td>
+                <a href="{{ url_for('admin.delete_user', user_id=user.id) }}" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Delete this user?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h4 class="mt-5">Conferences</h4>
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Organizer ID</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for conf in conferences %}
+        <tr>
+            <td>{{ conf.title }}</td>
+            <td>{{ conf.organizer_id }}</td>
+            <td>
+                <a href="{{ url_for('admin.delete_conference', conf_id=conf.id) }}" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Delete this conference?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

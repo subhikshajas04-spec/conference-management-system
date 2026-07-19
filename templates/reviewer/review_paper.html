@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h2 class="mb-4">Review Paper</h2>
+    <h5 class="mb-4">{{ paper.title }}</h5>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h6>Submitted Paper File</h6>
+            <p class="text-muted small">{{ paper.file_path }}</p>
+
+            <a href="{{ url_for('uploaded_file', filename=paper.file_path.replace('\\', '/').split('/')[-1]) }}"
+                target="_blank" class="btn btn-primary btn-lg">
+                <i class="fas fa-download"></i> Download Paper
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Score (1-10)</label>
+                    <input type="number" name="score" min="1" max="10" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Comments / Feedback</label>
+                    <textarea name="comments" class="form-control" rows="6" required
+                        placeholder="Write detailed review..."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Recommendation</label>
+                    <select name="recommendation" class="form-select" required>
+                        <option value="accept">Accept</option>
+                        <option value="reject">Reject</option>
+                        <option value="revise">Revise</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg">Submit Review</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

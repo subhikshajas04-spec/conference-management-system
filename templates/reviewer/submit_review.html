@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Review Paper: {{ paper.title }}</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label>Score (1-10)</label>
+        <input type="number" name="score" min="1" max="10" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Comments</label>
+        <textarea name="comments" class="form-control" rows="5" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label>Recommendation</label>
+        <select name="recommendation" class="form-select" required>
+            <option value="accept">Accept</option>
+            <option value="reject">Reject</option>
+            <option value="revise">Revise</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Submit Review</button>
+</form>
+
+{% endblock %}

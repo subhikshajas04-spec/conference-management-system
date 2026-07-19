@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container py-5">
+    <h2 class="mb-4 fw-bold">Available Conferences</h2>
+    <p class="lead text-muted mb-5">Discover and register for upcoming academic events</p>
+
+    {% if conferences %}
+    <div class="row g-4">
+        {% for conf in conferences %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow border-0 overflow-hidden">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title fw-bold">{{ conf.title }}</h5>
+                        <span class="badge bg-primary">{{ conf.status|upper if conf.status else 'DRAFT' }}</span>
+                    </div>
+
+                    <p class="text-muted small mb-3">{{ conf.description[:150] }}...</p>
+
+                    <div class="row text-muted small">
+                        <div class="col-6">
+                            <i class="fas fa-calendar"></i> {{ conf.start_date }} - {{ conf.end_date }}
+                        </div>
+                        <div class="col-6">
+                            <i class="fas fa-map-marker-alt"></i> {{ conf.location }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-white border-0 pt-0">
+                    <a href="{{ url_for('attendee.register_conference', conf_id=conf.id) }}"
+                        class="btn btn-success w-100">
+                        <i class="fas fa-ticket-alt"></i> Register as Attendee
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center py-5">
+        <i class="fas fa-calendar-alt fa-3x mb-3 text-muted"></i>
+        <h5>No conferences available at the moment.</h5>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Submit Research Paper</h2>
+<form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <select name="conference_id" class="form-select" required>
+            <option value="">Select Conference</option>
+            {% for conf in conferences %}
+            <option value="{{ conf.id }}">{{ conf.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3"><input type="text" name="title" class="form-control" placeholder="Paper Title" required></div>
+    <div class="mb-3"><textarea name="abstract" class="form-control" rows="4" placeholder="Abstract"
+            required></textarea></div>
+    <div class="mb-3"><input type="text" name="keywords" class="form-control" placeholder="Keywords" required></div>
+    <div class="mb-3"><input type="file" name="paper" class="form-control" accept=".pdf" required></div>
+    <button type="submit" class="btn btn-primary">Submit Paper</button>
+</form>
+{% endblock %}

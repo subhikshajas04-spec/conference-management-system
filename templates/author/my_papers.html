@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>My Submitted Papers</h2>
+
+{% if papers %}
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Conference ID</th>
+            <th>Status</th>
+            <th>Submitted Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paper in papers %}
+        <tr>
+            <td>{{ paper.title }}</td>
+            <td>{{ paper.conference_id }}</td>
+            <td>
+                <span class="badge 
+                    {% if paper.status == 'accepted' %}bg-success
+                    {% elif paper.status == 'rejected' %}bg-danger
+                    {% elif paper.status == 'revised' %}bg-warning
+                    {% else %}bg-secondary{% endif %}">
+                    {{ paper.status|upper }}
+                </span>
+            </td>
+            <td>{{ paper.submitted_at.strftime('%d-%m-%Y') }}</td>
+            <td>
+                <!-- Download Button -->
+                <a href="{{ url_for('uploaded_file', filename=paper.file_path.replace('\\', '/').split('/')[-1]) }}"
+                    class="btn btn-sm btn-outline-primary" target="_blank">
+                    Download
+                </a>
+
+                <!-- Plagiarism Check Button -->
+                <a href="{{ url_for('author.check_plagiarism', paper_id=paper.id) }}"
+                    class="btn btn-sm btn-warning ms-2">
+                    Check Plagiarism
+                </a>
+
+                <!-- Scheduled Time -->
+                {% if paper.schedule %}
+                <span class="badge bg-info ms-2">
+                    Scheduled: {{ paper.schedule.session_date }} {{ paper.schedule.session_time }}
+                </span>
+                {% endif %}
+
+                <!-- Revision Upload -->
+                {% if paper.status == 'revised' %}
+                <a href="{{ url_for('author.upload_revision', paper_id=paper.id) }}"
+                    class="btn btn-sm btn-warning ms-2">Upload Revision</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">You haven't submitted any papers yet.</div>
+{% endif %}
+
+<a href="{{ url_for('author.submit_paper') }}" class="btn btn-primary mt-3">Submit New Paper</a>
+
+{% endblock %}

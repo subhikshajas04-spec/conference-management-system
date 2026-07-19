@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Manage Papers - {{ conference.title }}</h2>
+
+<a href="{{ url_for('organizer.my_conferences') }}" class="btn btn-secondary mb-3">← Back to My Conferences</a>
+
+{% if papers %}
+<div class="card shadow">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paper in papers %}
+                <tr>
+                    <td>{{ paper.title }}</td>
+                    <td>{{ paper.author_id }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if paper.status == 'accepted' %}bg-success
+                            {% elif paper.status == 'rejected' %}bg-danger
+                            {% elif paper.status == 'revised' %}bg-warning
+                            {% else %}bg-secondary{% endif %}">
+                            {{ paper.status|upper }}
+                        </span>
+                    </td>
+                    <td>{{ paper.submitted_at.strftime('%d %b %Y') }}</td>
+                    <td>
+                        <!-- Update Status -->
+                        <form method="POST" action="{{ url_for('organizer.update_paper_status', paper_id=paper.id) }}"
+                            class="d-inline">
+                            <select name="status" class="form-select form-select-sm d-inline w-auto">
+                                <option value="accepted">Accept</option>
+                                <option value="rejected">Reject</option>
+                                <option value="revised">Revise</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-warning">Update</button>
+                        </form>
+
+                        <!-- Assign Reviewer -->
+                        <a href="{{ url_for('organizer.assign_reviewer', paper_id=paper.id) }}"
+                            class="btn btn-sm btn-info ms-2">Assign Reviewer</a>
+
+                        <!-- View Reviews -->
+                        <a href="{{ url_for('organizer.view_reviews', paper_id=paper.id) }}"
+                            class="btn btn-sm btn-primary ms-2">View Reviews</a>
+
+                        <!-- Schedule Presentation -->
+                        {% if paper.status == 'accepted' %}
+                        <a href="{{ url_for('organizer.schedule_presentation', paper_id=paper.id) }}"
+                            class="btn btn-sm btn-success ms-2">Schedule Presentation</a>
+                        {% endif %}
+
+                        <!-- Show Scheduled Time -->
+                        {% if paper.schedule %}
+                        <span class="badge bg-info ms-2">
+                            Scheduled: {{ paper.schedule.session_date }} {{ paper.schedule.session_time }}
+                        </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">No papers submitted yet for this conference.</div>
+{% endif %}
+
+{% endblock %}

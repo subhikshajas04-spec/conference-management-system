@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container py-5">
+    <h2>Plagiarism Check Report</h2>
+    <h5 class="mb-4">{{ paper.title }}</h5>
+
+    <div class="card shadow p-5">
+        <div class="text-center">
+            <h4>Similarity Score</h4>
+            <h1 class="display-1 fw-bold text-danger">{{ score }}%</h1>
+
+            <div class="progress mt-4" style="height: 25px;">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ score }}%"
+                    aria-valuenow="{{ score }}" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            {% if score > 60 %}
+            <p class="text-danger fw-bold">⚠️ High similarity detected. Consider rewriting some sections before
+                submission.</p>
+            {% elif score > 40 %}
+            <p class="text-warning fw-bold">Moderate similarity. Minor revisions recommended.</p>
+            {% else %}
+            <p class="text-success fw-bold">✅ Low similarity. Paper appears original.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('author.my_papers') }}" class="btn btn-secondary">← Back to My Papers</a>
+    </div>
+</div>
+
+{% endblock %}

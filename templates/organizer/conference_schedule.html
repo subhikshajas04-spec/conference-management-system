@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Conference Schedule - {{ conference.title }}</h2>
+<p class="text-muted">{{ conference.start_date }} to {{ conference.end_date }} | {{ conference.location }}</p>
+
+{% if papers %}
+<div class="card shadow">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Session Title</th>
+                    <th>Paper Title</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for paper in papers %}
+                {% if paper.schedule %}
+                <tr>
+                    <td>{{ paper.schedule.session_title }}</td>
+                    <td>{{ paper.title }}</td>
+                    <td>{{ paper.schedule.session_date }}</td>
+                    <td>{{ paper.schedule.session_time }}</td>
+                    <td>{{ paper.author_id }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-info">No presentations scheduled yet.</div>
+{% endif %}
+
+<a href="{{ url_for('organizer.my_conferences') }}" class="btn btn-secondary">Back</a>
+
+{% endblock %}
