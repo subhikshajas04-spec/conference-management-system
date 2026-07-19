@@ -60,3 +60,52 @@ conference-management-system/
 ├── requirements.txt     # Python dependencies
 ├── README.md            # Project documentation
 └── .gitignore           # Git ignored files
+🚀 Installation and Setup
+1. Clone the Repository
+git clone https://github.com/subhikshajas04-spec/conference-management-system.git
+2. Navigate to the Project Directory
+cd conference-management-system
+3. Install Required Dependencies
+py -m pip install -r requirements.txt
+4. Run the Application
+py app.py
+5. Open the Application
+
+Open your web browser and visit:
+
+http://127.0.0.1:5000
+
+The application will create the required database when it is started.
+
+🔐 User Roles
+
+The system supports different roles with role-specific functionalities:
+
+Role	Main Responsibilities
+Admin	Manage users and system operations
+Organizer	Create conferences, manage papers, assign reviewers, and schedule presentations
+Author	Submit papers and track submission status
+Reviewer	Review assigned papers and submit reviews
+Attendee	Browse conferences and register for events
+📌 Project Purpose
+
+The purpose of ConfHub is to simplify and centralize conference management activities through a single web-based platform. The project demonstrates the implementation of role-based access, database management, file handling, paper review workflows, conference scheduling, and PDF generation using Flask.
+
+🔮 Future Improvements
+Email notifications for paper status updates
+Integration with real plagiarism detection APIs
+Online payment integration for conference registration
+Cloud-based file storage
+Deployment to a production web server
+Advanced analytics and reporting
+👩‍💻 Project Type
+
+Mini Project
+
+Developed using: Python, Flask, SQLite, HTML, CSS, Bootstrap, and JavaScript
+
+
+After you paste it into `README.md`, click **Commit changes** with this message:
+
+```text
+Improve project README documentation
